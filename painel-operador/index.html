@@ -35,6 +35,13 @@
   .msg small{display:block;color:var(--mudo);margin-bottom:2px;font-size:12px}
   .dica{color:var(--mudo);font-size:14px;margin:0}
   .dica code{background:var(--grafite);border:1px solid var(--linha);padding:2px 8px;border-radius:6px;color:var(--papel);font-size:13px}
+  .cmds{display:grid;gap:10px;margin-top:14px}
+  .cmd{background:var(--grafite);border:1px solid var(--linha);border-radius:10px;padding:12px 14px}
+  .cmd .ct{font:600 15px "Space Grotesk",sans-serif;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .cmd .ct span{font:500 11px Inter,sans-serif;color:var(--grafite);background:var(--limao);border-radius:999px;padding:1px 8px;text-transform:uppercase;letter-spacing:.05em}
+  .cmd code{display:inline-block;background:var(--card);border:1px solid var(--linha);padding:3px 9px;border-radius:6px;color:var(--papel);font-size:13px;margin:2px 0;word-break:break-word}
+  .cmd p{margin:6px 0 0;color:#cfd6d1;font-size:14px}
+  .cmd p code{margin:0}
   ul{list-style:none;margin:0;padding:0}
   li.h{display:flex;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid var(--linha);flex-wrap:wrap}
   li.h:first-child{border-top:0}
@@ -66,8 +73,36 @@
   </section>
 
   <section class="card">
-    <h2>Como informar o operador</h2>
-    <p class="dica">Envie no WhatsApp da Matrix: <code>Matrix, operador Seu Nome</code></p>
+    <h2>Comandos pelo WhatsApp</h2>
+    <p class="dica">Mande um <b>áudio</b> começando com <b>Matrix</b>. Só uma coisa fica esperando por vez: um pedido novo substitui o anterior.</p>
+    <div class="cmds">
+      <div class="cmd">
+        <div class="ct">Post no Instagram <span>áudio</span></div>
+        <code>Matrix, insta, post de bom dia</code>
+        <p>Chega a prévia da imagem. Responda <b>1</b> para publicar ou <b>2</b> para cancelar.</p>
+      </div>
+      <div class="cmd">
+        <div class="ct">Compromisso na agenda <span>áudio</span></div>
+        <code>Matrix, agenda, reunião com o João sexta às 15h</code>
+        <p>Diga o nome, o dia e a hora. Marca 1 hora na Google Agenda e confirma por mensagem.</p>
+      </div>
+      <div class="cmd">
+        <div class="ct">E-mail <span>áudio + texto</span></div>
+        <code>Matrix, email para o Hugo, segue o orçamento que combinamos ontem</code>
+        <p>Depois <b>escreva</b> o assunto. Se a pessoa não for um contato salvo, escreva o destinatário e o assunto:</p>
+        <code>joao@gmail.com Orçamento do mês</code>
+        <p>Chega a prévia. Responda <b>1</b> para enviar ou <b>2</b> para cancelar. Contatos salvos: <b>hugo</b>, <b>andrey</b>.</p>
+      </div>
+      <div class="cmd">
+        <div class="ct">Informar o operador <span>texto</span></div>
+        <code>Matrix, operador Seu Nome</code>
+        <p>O nome aparece neste painel em até 30 segundos.</p>
+      </div>
+      <div class="cmd">
+        <div class="ct">Responder <span>texto</span></div>
+        <p><code>1</code> ou <code>sim</code> aprova o que está esperando &nbsp;·&nbsp; <code>2</code> ou <code>não</code> cancela</p>
+      </div>
+    </div>
   </section>
 
   <section class="card">
