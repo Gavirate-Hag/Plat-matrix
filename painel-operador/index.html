@@ -42,6 +42,12 @@
   .cmd code{display:inline-block;background:var(--card);border:1px solid var(--linha);padding:3px 9px;border-radius:6px;color:var(--papel);font-size:13px;margin:2px 0;word-break:break-word}
   .cmd p{margin:6px 0 0;color:#cfd6d1;font-size:14px}
   .cmd p code{margin:0}
+  .form label{display:block;font-size:12px;color:var(--mudo);margin:12px 0 5px}
+  .form input{width:100%;background:var(--grafite);border:1px solid var(--linha);color:var(--papel);border-radius:9px;padding:10px 12px;font:inherit}
+  .form input:focus{outline:2px solid var(--limao);outline-offset:-1px}
+  button.pri{background:var(--limao);color:var(--grafite);border-color:var(--limao)}
+  .aviso{margin-top:10px;font-size:13px;color:var(--mudo);min-height:1em}
+  .aviso.ok{color:var(--limao)} .aviso.err{color:var(--erro)}
   ul{list-style:none;margin:0;padding:0}
   li.h{display:flex;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid var(--linha);flex-wrap:wrap}
   li.h:first-child{border-top:0}
@@ -70,6 +76,19 @@
       </div>
     </div>
     <div class="msg"><small>Última mensagem</small><span id="texto">—</span></div>
+  </section>
+
+  <section class="card">
+    <h2>WhatsApp do operador</h2>
+    <p class="dica">Só este número consegue usar a Matrix pelo WhatsApp. Atual: <b id="autorizado">—</b></p>
+    <div class="form">
+      <label for="novoNum">Novo número (DDD + número)</label>
+      <input id="novoNum" inputmode="tel" placeholder="Ex.: 91 98113-4746" autocomplete="off">
+      <label for="pin">PIN</label>
+      <input id="pin" inputmode="numeric" type="password" placeholder="PIN de 6 dígitos" autocomplete="off" maxlength="12">
+      <button id="salvarNum" class="pri">Salvar número</button>
+      <div class="aviso" id="avisoNum"></div>
+    </div>
   </section>
 
   <section class="card">
@@ -151,7 +170,7 @@
     if (atual && atual.nome) {
       nome.textContent = atual.nome; nome.className = 'nome';
       av.textContent = atual.nome.trim().charAt(0).toUpperCase(); av.className = 'av';
-      $('#meta').textContent = [fmtNum(atual.numero), ago(atual.recebido_em)].filter(Boolean).join(' · ');
+      $('#meta').textContent = [atual.numero_final ? 'WhatsApp final ' + atual.numero_final : '', ago(atual.recebido_em)].filter(Boolean).join(' · ');
       $('#texto').textContent = atual.texto || '—';
     } else {
       nome.textContent = 'Aguardando…'; nome.className = 'nome vazio';
@@ -160,7 +179,7 @@
       $('#texto').textContent = '—';
     }
     $('#hist').innerHTML = hist.length ? hist.map(function(h){
-      return '<li class="h"><b>' + esc(h.nome) + '</b><span>' + esc(fmtNum(h.numero)) +
+      return '<li class="h"><b>' + esc(h.nome) + '</b><span>' + esc(h.numero_final ? 'final ' + h.numero_final : '') +
              '</span><span class="t">' + esc(ago(h.recebido_em)) + '</span></li>';
     }).join('') : '<li class="h"><span>Nada por aqui ainda.</span></li>';
   }
@@ -177,7 +196,8 @@
       .then(function(r){ if (!r.ok) throw 0; return r.json(); })
       .then(function(j){
         setPill('live', 'Ao vivo');
-        if (j && j.nome) aplicar({nome: j.nome, numero: j.numero, texto: j.texto, recebido_em: j.recebido_em});
+        if (j && j.autorizado_final) $('#autorizado').textContent = 'final ' + j.autorizado_final;
+        if (j && j.nome) aplicar({nome: j.nome, numero_final: j.numero_final, texto: j.texto, recebido_em: j.recebido_em});
       })
       .catch(function(){ setPill('err', 'Sem conexão'); });
   }
@@ -191,6 +211,27 @@
   $('#pill').style.cursor = 'pointer';
   document.addEventListener('visibilitychange', function(){ if (!document.hidden && !pausado) ler(); });
   $('#limpar').onclick = function(){ hist = []; atual = null; store.set('mx_hist', '[]'); render(); };
+
+  $('#salvarNum').onclick = function(){
+    var av = $('#avisoNum'), b = this;
+    var d = $('#novoNum').value.replace(/\D/g, '');
+    if (d.length === 10 || d.length === 11) d = '55' + d;
+    if (!/^55\d{10,11}$/.test(d)) { av.className = 'aviso err'; av.textContent = 'Número inválido. Use DDD + número, ex.: 91 98113-4746.'; return; }
+    var pin = $('#pin').value.trim();
+    if (!pin) { av.className = 'aviso err'; av.textContent = 'Digite o PIN.'; return; }
+    b.disabled = true; av.className = 'aviso'; av.textContent = 'Salvando…';
+    fetch(FONTE + '?acao=numero&numero=' + encodeURIComponent(d) + '&pin=' + encodeURIComponent(pin), {cache: 'no-store'})
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if (j && j.ok) {
+          av.className = 'aviso ok'; av.textContent = 'Número salvo. A partir de agora só ele usa a Matrix.';
+          $('#autorizado').textContent = 'final ' + j.autorizado_final;
+          $('#novoNum').value = ''; $('#pin').value = '';
+        } else { av.className = 'aviso err'; av.textContent = (j && j.erro) || 'Não foi possível salvar.'; }
+      })
+      .catch(function(){ av.className = 'aviso err'; av.textContent = 'Sem conexão. Tente de novo.'; })
+      .then(function(){ b.disabled = false; });
+  };
 
   render();
   iniciar();
