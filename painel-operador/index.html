@@ -84,7 +84,7 @@
 
   <section class="card">
     <h2>WhatsApp do operador</h2>
-    <p class="dica">Só este número consegue falar com o robô Matrix pelo WhatsApp. Atual: <b id="autorizado">—</b></p>
+    <p class="dica">Só este número consegue falar com o Agente Matrix pelo WhatsApp. Atual: <b id="autorizado">—</b></p>
     <div class="form">
       <label for="novoNum">Novo número (DDD + número)</label>
       <input id="novoNum" inputmode="tel" placeholder="Ex.: 91 98113-4746" autocomplete="off">
@@ -96,8 +96,8 @@
   </section>
 
   <section class="card">
-    <h2>Comandos do robô Matrix no WhatsApp</h2>
-    <p class="dica">O robô se chama <b>Matrix</b>: comece todo <b>áudio</b> chamando por ele, dizendo “Matrix”. Só uma coisa fica esperando por vez: um pedido novo substitui o anterior.</p>
+    <h2>Comandos do Agente Matrix no WhatsApp</h2>
+    <p class="dica">O Agente se chama <b>Matrix</b>: comece todo <b>áudio</b> chamando por ele, dizendo “Matrix”. Só uma coisa fica esperando por vez: um pedido novo substitui o anterior.</p>
     <div class="cmds">
       <div class="cmd">
         <div class="ct">Post no Instagram <span>áudio</span></div>
@@ -228,7 +228,7 @@
       .then(function(r){ return r.json(); })
       .then(function(j){
         if (j && j.ok) {
-          av.className = 'aviso ok'; av.textContent = 'Número salvo. A partir de agora só ele fala com o robô Matrix.';
+          av.className = 'aviso ok'; av.textContent = 'Número salvo. A partir de agora só ele fala com o Agente Matrix.';
           $('#autorizado').textContent = 'final ' + j.autorizado_final;
           $('#novoNum').value = ''; $('#pin').value = '';
         } else { av.className = 'aviso err'; av.textContent = (j && j.erro) || 'Não foi possível salvar.'; }
