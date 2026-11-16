@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Plataforma Matrix — sua operação de IA para negócios</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23D9480F%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2219%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Georgia%22 font-weight=%22bold%22%3EM%3C/text%3E%3C/svg%3E">
 <meta name="description" content="Plataforma para aprender, construir, vender e entregar soluções de IA para empresas.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,7 +26,7 @@ a{color:var(--ember)}
 .side{background:var(--side);color:var(--side-ink);position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column;padding:18px 12px}
 .brand{display:flex;align-items:center;gap:10px;padding:4px 10px 18px}
 .brand-mark{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--ember-2),var(--ember));display:grid;place-items:center;font-family:var(--fd);font-weight:700;color:#fff;font-size:18px}
-.brand-name{font-family:var(--fd);font-size:20px;font-weight:600;letter-spacing:-.01em}
+.brand-name{font-family:var(--fd);font-size:17px;white-space:nowrap;font-weight:600;letter-spacing:-.01em}
 .brand-sub{font-size:11px;color:var(--side-muted);letter-spacing:.04em;text-transform:uppercase}
 .nav-group{margin:10px 0 4px;padding:0 10px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--side-muted);font-weight:700}
 .nav a{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;color:var(--side-ink);text-decoration:none;font-size:14px;font-weight:500;opacity:.86}
@@ -1361,7 +1362,7 @@ function vPainel(){
   return `
   <div class="eyebrow">Painel</div>
   <h1>${E.config.seuNome ? "Olá, " + esc(E.config.seuNome.split(" ")[0]) + "." : "Bem-vindo à Plataforma Matrix."}</h1>
-  <p class="lead">Sua operação para aprender, construir, vender e entregar IA para empresas — tudo em um lugar, com o progresso salvo na sua conta.</p>
+  <p class="lead">Sua operação para aprender, construir, vender e entregar IA para empresas — tudo em um lugar, com o progresso salvo automaticamente.</p>
   <div class="card hero" style="margin-bottom:16px">
     <div class="eyebrow">Seu próximo passo</div>
     <h2>${esc(pp.t)}</h2>
@@ -1506,7 +1507,7 @@ function vSolucao(id){
       <div class="small" style="margin-top:10px"><b>Stack sugerida:</b> ${s.stack.map(k => `<span class="tag ember">${esc(k)}</span>`).join(" ")}</div></div>
     <div class="card"><div class="eyebrow">Como funciona</div><div class="flow" style="margin-top:12px">${s.fluxo.map((f, i) => `<div class="s"><div class="k">${i+1}</div><div class="t small">${esc(f)}</div></div>`).join("")}</div></div>
   </div>
-  <h2>Passo a passo de implementação <span class="tag teal" style="font-family:var(--fb);vertical-align:middle">salvo na sua conta</span></h2>
+  <h2>Passo a passo de implementação <span class="tag teal" style="font-family:var(--fb);vertical-align:middle">salvo automaticamente</span></h2>
   <div class="card">${s.passos.map((t, i) => `<div class="chk ${st[i]?"done":""}" data-p="${i}"><div class="box">${st[i]?"✓":""}</div><div class="t">${esc(t)}</div></div>`).join("")}</div>
   <h2>Prompt-base</h2><p class="muted small" style="margin-top:-6px">Troque as {variáveis} pelos dados do cliente. Use como ponto de partida e teste no seu golden set.</p>
   <div class="copybox"><pre class="pre">${esc(s.prompt)}</pre><button class="btn sm" id="cp-prompt">Copiar</button></div>

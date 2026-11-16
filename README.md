@@ -2,7 +2,7 @@
 
 Plataforma para aprender, construir, vender e entregar soluções de IA para empresas: trilhas de aprendizado, catálogo de 20 soluções, estúdio, biblioteca de prompts, nichos, CRM, diagnóstico, propostas, calculadora de preços, scripts de venda, métricas e gestão de projetos.
 
-Site estático em um único arquivo (`index.html`), sem build e sem backend. Os dados ficam salvos no navegador (localStorage).
+Site estático em um único arquivo (`index.html`), sem build e sem backend. Os dados (progresso, CRM, propostas) ficam salvos no navegador de quem usa (localStorage); use Configurações → Backup para exportar e importar.
 
 ## Rodar localmente
 ```bash
