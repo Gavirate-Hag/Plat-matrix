@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Painel do Operador — Matrix</title>
+<title>Plataforma Matrix — Painel do Operador</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <style>
@@ -19,6 +19,7 @@
   .logo i{width:9px;height:9px;background:var(--musgo);border-radius:2px}
   .logo i:nth-child(5){background:var(--limao)}
   h1{font:700 22px "Space Grotesk",Inter,sans-serif;margin:0;letter-spacing:-.01em}
+  .marca{font:700 12px "Space Grotesk",sans-serif;text-transform:uppercase;letter-spacing:.14em;color:var(--limao);margin-bottom:2px}
   .pill{margin-left:auto;display:flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--linha);border-radius:999px;font-size:13px;color:var(--mudo)}
   .dot{width:8px;height:8px;border-radius:50%;background:var(--musgo)}
   .pill.live .dot{background:var(--limao);box-shadow:0 0 0 4px rgba(200,242,90,.15)}
@@ -62,7 +63,10 @@
 <div class="wrap">
   <header>
     <div class="logo"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <h1>Painel do Operador</h1>
+    <div>
+      <div class="marca">Plataforma Matrix</div>
+      <h1>Painel do Operador</h1>
+    </div>
     <div class="pill" id="pill"><span class="dot"></span><span id="pillTxt">Conectando…</span></div>
   </header>
 
