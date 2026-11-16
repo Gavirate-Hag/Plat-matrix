@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Painel do Operador — Matrix Andrey</title>
+<title>Painel do Operador — Matrix</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <style>
@@ -13,21 +13,17 @@
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--grafite);color:var(--papel);font:15px/1.5 Inter,system-ui,sans-serif}
-  h1,h2,.num{font-family:"Space Grotesk",Inter,sans-serif}
-  .wrap{max-width:1040px;margin:0 auto;padding:28px 20px 60px}
-  header{display:flex;align-items:center;gap:14px;margin-bottom:26px;flex-wrap:wrap}
+  .wrap{max-width:760px;margin:0 auto;padding:28px 20px 60px}
+  header{display:flex;align-items:center;gap:14px;margin-bottom:26px}
   .logo{display:grid;grid-template-columns:repeat(3,9px);gap:3px}
   .logo i{width:9px;height:9px;background:var(--musgo);border-radius:2px}
   .logo i:nth-child(5){background:var(--limao)}
-  h1{font-size:22px;margin:0;letter-spacing:-.01em}
-  .sub{color:var(--mudo);font-size:13px}
+  h1{font:700 22px "Space Grotesk",Inter,sans-serif;margin:0;letter-spacing:-.01em}
   .pill{margin-left:auto;display:flex;align-items:center;gap:8px;padding:6px 12px;border:1px solid var(--linha);border-radius:999px;font-size:13px;color:var(--mudo)}
   .dot{width:8px;height:8px;border-radius:50%;background:var(--musgo)}
   .pill.live .dot{background:var(--limao);box-shadow:0 0 0 4px rgba(200,242,90,.15)}
   .pill.err .dot{background:var(--erro)}
-  .grid{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
-  @media(max-width:820px){.grid{grid-template-columns:1fr}}
-  .card{background:var(--card);border:1px solid var(--linha);border-radius:14px;padding:20px}
+  .card{background:var(--card);border:1px solid var(--linha);border-radius:14px;padding:20px;margin-bottom:16px}
   .card h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--mudo);margin:0 0 14px;font-weight:500}
   .op{display:flex;align-items:center;gap:18px}
   .av{width:76px;height:76px;border-radius:18px;background:var(--limao);color:var(--grafite);display:grid;place-items:center;font:700 30px "Space Grotesk",sans-serif;flex:none}
@@ -37,150 +33,68 @@
   .meta{color:var(--mudo);font-size:14px;margin-top:6px}
   .msg{margin-top:18px;padding:12px 14px;background:var(--grafite);border:1px solid var(--linha);border-radius:10px;font-size:14px;color:#cfd6d1;min-height:44px}
   .msg small{display:block;color:var(--mudo);margin-bottom:2px;font-size:12px}
-  label{display:block;font-size:12px;color:var(--mudo);margin:12px 0 5px}
-  input,textarea{width:100%;background:var(--grafite);border:1px solid var(--linha);color:var(--papel);border-radius:9px;padding:10px 12px;font:inherit}
-  input:focus,textarea:focus{outline:2px solid var(--limao);outline-offset:-1px}
-  textarea{resize:vertical;min-height:70px}
-  .row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-  button{background:var(--limao);color:var(--grafite);border:0;border-radius:9px;padding:9px 14px;font:600 14px Inter,sans-serif;cursor:pointer}
-  button.sec{background:transparent;color:var(--papel);border:1px solid var(--musgo)}
-  button:hover{filter:brightness(1.08)}
-  .aviso{margin-top:10px;font-size:13px;color:var(--mudo)}
-  .aviso.err{color:var(--erro)}
-  .full{grid-column:1/-1}
+  .dica{color:var(--mudo);font-size:14px;margin:0}
+  .dica code{background:var(--grafite);border:1px solid var(--linha);padding:2px 8px;border-radius:6px;color:var(--papel);font-size:13px}
   ul{list-style:none;margin:0;padding:0}
-  li.h{display:flex;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid var(--linha)}
+  li.h{display:flex;gap:12px;align-items:baseline;padding:10px 0;border-top:1px solid var(--linha);flex-wrap:wrap}
   li.h:first-child{border-top:0}
   li.h b{font-family:"Space Grotesk",sans-serif;min-width:150px}
   li.h span{color:var(--mudo);font-size:13px}
   li.h .t{margin-left:auto;white-space:nowrap}
-  details{margin-top:4px}
-  summary{cursor:pointer;color:var(--limao);font-weight:500}
-  pre{background:var(--grafite);border:1px solid var(--linha);border-radius:9px;padding:12px;overflow:auto;font-size:12.5px;color:#cfd6d1}
-  ol{padding-left:20px;color:#cfd6d1} ol li{margin:6px 0}
-  code{background:var(--grafite);padding:1px 6px;border-radius:5px;font-size:12.5px}
+  button{background:transparent;color:var(--papel);border:1px solid var(--musgo);border-radius:9px;padding:8px 14px;font:600 14px Inter,sans-serif;cursor:pointer;margin-top:12px}
+  button:hover{border-color:var(--limao)}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
     <div class="logo"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-    <div>
-      <h1>Painel do Operador</h1>
-      <div class="sub">Matrix Andrey · cenário Make 6971220 · nome recebido pelo WhatsApp</div>
-    </div>
-    <div class="pill" id="pill"><span class="dot"></span><span id="pillTxt">Simulação</span></div>
+    <h1>Painel do Operador</h1>
+    <div class="pill" id="pill"><span class="dot"></span><span id="pillTxt">Conectando…</span></div>
   </header>
 
-  <div class="grid">
-    <section class="card">
-      <h2>Operador agora</h2>
-      <div class="op">
-        <div class="av vazio" id="av">?</div>
-        <div>
-          <div class="nome vazio" id="nome">Aguardando mensagem…</div>
-          <div class="meta" id="meta">Nenhum nome recebido ainda</div>
-        </div>
+  <section class="card">
+    <h2>Operador agora</h2>
+    <div class="op">
+      <div class="av vazio" id="av">?</div>
+      <div>
+        <div class="nome vazio" id="nome">Aguardando…</div>
+        <div class="meta" id="meta">Nenhum operador informado ainda</div>
       </div>
-      <div class="msg"><small>Última mensagem recebida</small><span id="texto">—</span></div>
-    </section>
+    </div>
+    <div class="msg"><small>Última mensagem</small><span id="texto">—</span></div>
+  </section>
 
-    <section class="card">
-      <h2>Conexão com o Make</h2>
-      <label for="url">URL do webhook do painel</label>
-      <input id="url" placeholder="https://hook.us1.make.com/..." autocomplete="off">
-      <div class="row">
-        <button id="salvarUrl">Conectar</button>
-        <button class="sec" id="desconectar">Simulação</button>
-        <button class="sec" id="padrao">URL padrão</button>
-      </div>
-      <div class="aviso" id="avisoCon">Conectando ao Make…</div>
-    </section>
+  <section class="card">
+    <h2>Como informar o operador</h2>
+    <p class="dica">Envie no WhatsApp da Matrix: <code>Matrix, operador Seu Nome</code></p>
+  </section>
 
-    <section class="card">
-      <h2>Simular mensagem do WhatsApp</h2>
-      <label for="simNum">Número do operador</label>
-      <input id="simNum" value="5591981134746" inputmode="numeric">
-      <label for="simTxt">Texto recebido</label>
-      <textarea id="simTxt">Matrix, operador Andrey Maciel</textarea>
-      <div class="row">
-        <button id="simEnviar">Receber mensagem</button>
-        <button class="sec" id="simExemplo">Outro exemplo</button>
-      </div>
-      <div class="aviso" id="avisoSim">Simulação local. No WhatsApp de verdade o robô reconhece: “operador …”, “meu nome é …”, “me chamo …”.</div>
-    </section>
-
-    <section class="card">
-      <h2>Definir operador pelo painel</h2>
-      <label for="setNome">Nome</label>
-      <input id="setNome" placeholder="Ex.: Andrey Maciel">
-      <label for="setNum">Número (com 55 e DDD)</label>
-      <input id="setNum" placeholder="5591981134746" inputmode="numeric">
-      <div class="row"><button id="gravar">Gravar operador</button></div>
-      <div class="aviso" id="avisoSet">Em modo conectado, grava no Make; em simulação, só aqui.</div>
-    </section>
-
-    <section class="card full">
-      <h2>Histórico de nomes recebidos</h2>
-      <ul id="hist"></ul>
-      <div class="row"><button class="sec" id="limpar">Limpar histórico</button></div>
-    </section>
-
-    <section class="card full">
-      <details open>
-        <summary>Como funciona (já ligado no Make)</summary>
-        <ol>
-          <li>No WhatsApp do robô (+55 14 99896-6868), o operador autorizado escreve: <code>Matrix, operador Andrey Maciel</code> — ou <code>operador Andrey</code>, <code>meu nome é Andrey</code>, <code>me chamo Andrey</code>.</li>
-          <li>O cenário <b>Matrix Andrey</b> grava o nome no data store <code>Matrix Andrey — operador</code> (chave <code>OPERADOR</code>) e responde no WhatsApp: <i>“Painel atualizado. Operador: …”</i>.</li>
-          <li>Este painel lê o cenário <b>Painel do operador — Matrix Andrey</b> a cada 30 segundos, só com a aba visível, e pausa sozinho após 15 minutos e mostra o nome. “Gravar operador” aqui também atualiza o mesmo registro.</li>
-        </ol>
-        <div class="aviso">Cada leitura gasta cerca de 3 operações do Make (≈90 em 15 minutos de painel aberto).</div>
-      </details>
-    </section>
-  </div>
+  <section class="card">
+    <h2>Histórico</h2>
+    <ul id="hist"></ul>
+    <button id="limpar">Limpar histórico</button>
+  </section>
 </div>
 
 <script>
 (function(){
+  var FONTE = 'https://hook.us2.make.com/rjnp2wr41q5e72wae3id5tg62y8slgpl';
+  var INTERVALO = 30000, LIMITE = 15 * 60 * 1000;
   var $ = function(s){ return document.querySelector(s); };
   var store = {
     get: function(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
     set: function(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
   };
-  var URL_PADRAO = 'https://hook.us2.make.com/rjnp2wr41q5e72wae3id5tg62y8slgpl';
-  var salvo = store.get('mx_url');
-  var url = salvo === null ? URL_PADRAO : salvo;
   var hist = [];
   try { hist = JSON.parse(store.get('mx_hist') || '[]'); } catch(e){ hist = []; }
   var atual = hist.length ? hist[0] : null;
-  var timer = null;
-  var exemplos = [
-    'Matrix, operador Andrey Maciel',
-    'Meu nome é Hugo Gavirate',
-    'Me chamo Andrei',
-    'Eu sou a Carla',
-    'João Pedro'
-  ];
-  var exIdx = 0;
+  var timer = null, inicio = Date.now(), pausado = false;
 
-  function fixNome(n){ return String(n || '').replace(/andrei/gi, 'Andrey').replace(/\s+/g, ' ').trim(); }
-  function titulo(s){
-    return s.toLowerCase().replace(/(^|\s)([a-zà-ÿ])/g, function(_, a, b){ return a + b.toUpperCase(); });
-  }
-  function parseNome(texto){
-    var t = String(texto || '').replace(/[.!?]+$/g, '').trim();
-    var re = /(?:meu nome (?:é|e)|me chamo|eu sou|operador(?:a)?(?:\s+(?:é|e))?|\bsou)\s*[:,\-]?\s*([A-Za-zÀ-ÿ'’ ]{2,40})/i;
-    var m = t.match(re);
-    var nome = m ? m[1] : null;
-    if (!nome && /^[A-Za-zÀ-ÿ'’ ]{2,40}$/.test(t) && t.split(/\s+/).length <= 3) nome = t;
-    if (!nome) return null;
-    nome = nome.trim().split(/\s+/).slice(0, 4).join(' ');
-    return fixNome(titulo(nome));
-  }
   function fmtNum(n){
     var d = String(n || '').replace(/\D/g, '');
     var m = d.match(/^55(\d{2})(9?\d{4})(\d{4})$/);
-    return m ? '+55 (' + m[1] + ') ' + m[2] + '-' + m[3] : (d ? '+' + d : '—');
+    return m ? '(' + m[1] + ') ' + m[2] + '-' + m[3] : '';
   }
   function ago(iso){
     var t = new Date(iso).getTime();
@@ -196,124 +110,55 @@
       return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
     });
   }
-  function setPill(estado, txt){
-    var p = $('#pill');
-    p.className = 'pill' + (estado ? ' ' + estado : '');
-    $('#pillTxt').textContent = txt;
-  }
+  function setPill(estado, txt){ $('#pill').className = 'pill' + (estado ? ' ' + estado : ''); $('#pillTxt').textContent = txt; }
   function render(){
     var nome = $('#nome'), av = $('#av');
     if (atual && atual.nome) {
       nome.textContent = atual.nome; nome.className = 'nome';
       av.textContent = atual.nome.trim().charAt(0).toUpperCase(); av.className = 'av';
-      $('#meta').textContent = fmtNum(atual.numero) + ' · ' + ago(atual.recebido_em);
+      $('#meta').textContent = [fmtNum(atual.numero), ago(atual.recebido_em)].filter(Boolean).join(' · ');
       $('#texto').textContent = atual.texto || '—';
     } else {
-      nome.textContent = 'Aguardando mensagem…'; nome.className = 'nome vazio';
+      nome.textContent = 'Aguardando…'; nome.className = 'nome vazio';
       av.textContent = '?'; av.className = 'av vazio';
-      $('#meta').textContent = 'Nenhum nome recebido ainda';
+      $('#meta').textContent = 'Nenhum operador informado ainda';
       $('#texto').textContent = '—';
     }
-    var ul = $('#hist');
-    ul.innerHTML = hist.length ? hist.map(function(h){
+    $('#hist').innerHTML = hist.length ? hist.map(function(h){
       return '<li class="h"><b>' + esc(h.nome) + '</b><span>' + esc(fmtNum(h.numero)) +
              '</span><span class="t">' + esc(ago(h.recebido_em)) + '</span></li>';
-    }).join('') : '<li class="h"><span>Nada recebido ainda.</span></li>';
+    }).join('') : '<li class="h"><span>Nada por aqui ainda.</span></li>';
   }
   function aplicar(op){
     if (!op || !op.nome) return;
-    op.nome = fixNome(op.nome);
-    op.recebido_em = op.recebido_em || new Date().toISOString();
     if (atual && atual.nome === op.nome && atual.recebido_em === op.recebido_em) return;
     atual = op;
-    hist.unshift(op);
-    hist = hist.slice(0, 30);
+    hist.unshift(op); hist = hist.slice(0, 30);
     store.set('mx_hist', JSON.stringify(hist));
     render();
   }
-
-  /* --- simulação --- */
-  $('#simEnviar').onclick = function(){
-    var texto = $('#simTxt').value;
-    var nome = parseNome(texto);
-    var av = $('#avisoSim');
-    if (!nome) { av.className = 'aviso err'; av.textContent = 'Não achei um nome nessa mensagem. O robô responderia pedindo o nome.'; return; }
-    av.className = 'aviso'; av.textContent = 'Nome entendido: ' + nome;
-    aplicar({nome: nome, numero: $('#simNum').value.replace(/\D/g, ''), texto: fixNome(texto), recebido_em: new Date().toISOString()});
-  };
-  $('#simExemplo').onclick = function(){
-    exIdx = (exIdx + 1) % exemplos.length;
-    $('#simTxt').value = exemplos[exIdx];
-  };
-
-  /* --- conexão com o Make (tudo por GET, sem preflight de CORS) --- */
-  function montar(params){
-    var q = Object.keys(params).map(function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(params[k]); }).join('&');
-    return url + (url.indexOf('?') > -1 ? '&' : '?') + q;
-  }
   function ler(){
-    if (!url) return;
-    fetch(montar({acao: 'ler', t: Date.now()}), {cache: 'no-store'})
-      .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
-      .then(function(txt){
-        var j;
-        try { j = JSON.parse(txt); } catch(e) { throw new Error('o Make respondeu "' + txt.slice(0, 40) + '"'); }
-        var op = j && j.operador ? j.operador : j;
-        setPill('live', 'Ao vivo · Make');
-        $('#avisoCon').className = 'aviso';
-        $('#avisoCon').textContent = 'Conectado. Atualiza a cada 30 segundos (só com a aba aberta).';
-        if (op && op.nome) aplicar({nome: op.nome, numero: op.numero, texto: op.texto, recebido_em: op.recebido_em});
+    fetch(FONTE + '?acao=ler&t=' + Date.now(), {cache: 'no-store'})
+      .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+      .then(function(j){
+        setPill('live', 'Ao vivo');
+        if (j && j.nome) aplicar({nome: j.nome, numero: j.numero, texto: j.texto, recebido_em: j.recebido_em});
       })
-      .catch(function(e){
-        setPill('err', 'Erro de conexão');
-        $('#avisoCon').className = 'aviso err';
-        $('#avisoCon').textContent = 'Não consegui ler o Make (' + e.message + '). Confira se o cenário "Painel do operador — Matrix Andrey" está ligado.';
-      });
+      .catch(function(){ setPill('err', 'Sem conexão'); });
   }
-  var INTERVALO = 30000, LIMITE = 15 * 60 * 1000, inicio = 0, pausado = false;
   function tick(){
     if (document.hidden) return;
-    if (Date.now() - inicio > LIMITE) {
-      clearInterval(timer); pausado = true;
-      setPill('', 'Pausado');
-      $('#avisoCon').className = 'aviso';
-      $('#avisoCon').textContent = 'Pausado após 15 min para economizar operações do Make. Clique em Conectar para retomar.';
-      return;
-    }
+    if (Date.now() - inicio > LIMITE) { clearInterval(timer); pausado = true; setPill('', 'Pausado · clique para atualizar'); return; }
     ler();
   }
-  document.addEventListener('visibilitychange', function(){ if (!document.hidden && url && !pausado) ler(); });
-  function conectar(){
-    clearInterval(timer); pausado = false; inicio = Date.now();
-    if (url) { setPill('', 'Conectando…'); ler(); timer = setInterval(tick, INTERVALO); }
-    else { setPill('', 'Simulação'); $('#avisoCon').className = 'aviso'; $('#avisoCon').textContent = 'Sem URL: o painel funciona só em simulação, no seu navegador.'; }
-  }
-  $('#url').value = url;
-  $('#salvarUrl').onclick = function(){
-    var v = $('#url').value.trim();
-    if (v && !/^https:\/\//i.test(v)) { $('#avisoCon').className = 'aviso err'; $('#avisoCon').textContent = 'A URL precisa começar com https://'; return; }
-    url = v; store.set('mx_url', url); conectar();
-  };
-  $('#desconectar').onclick = function(){ url = ''; $('#url').value = ''; store.set('mx_url', ''); conectar(); };
-  $('#padrao').onclick = function(){ url = URL_PADRAO; $('#url').value = url; store.set('mx_url', url); conectar(); };
-
-  /* --- gravar operador --- */
-  $('#gravar').onclick = function(){
-    var nome = fixNome($('#setNome').value.trim());
-    var numero = $('#setNum').value.replace(/\D/g, '');
-    var av = $('#avisoSet');
-    if (!nome) { av.className = 'aviso err'; av.textContent = 'Digite o nome.'; return; }
-    var op = {nome: nome, numero: numero, texto: 'Definido pelo painel', recebido_em: new Date().toISOString()};
-    if (!url) { aplicar(op); av.className = 'aviso'; av.textContent = 'Gravado só neste navegador (simulação).'; return; }
-    fetch(montar({acao: 'gravar', nome: nome, numero: numero, recebido_em: op.recebido_em}))
-      .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); aplicar(op); av.className = 'aviso'; av.textContent = 'Gravado no Make.'; })
-      .catch(function(e){ av.className = 'aviso err'; av.textContent = 'Falhou ao gravar (' + e.message + ').'; });
-  };
-
+  function iniciar(){ clearInterval(timer); pausado = false; inicio = Date.now(); ler(); timer = setInterval(tick, INTERVALO); }
+  $('#pill').onclick = function(){ if (pausado) iniciar(); };
+  $('#pill').style.cursor = 'pointer';
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden && !pausado) ler(); });
   $('#limpar').onclick = function(){ hist = []; atual = null; store.set('mx_hist', '[]'); render(); };
 
   render();
-  conectar();
+  iniciar();
   setInterval(render, 30000);
 })();
 </script>
