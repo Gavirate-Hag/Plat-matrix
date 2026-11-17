@@ -21,7 +21,7 @@ jobs:
       - uses: actions/configure-pages@v5
         with:
           enablement: true
-      - run: mkdir _site && cp index.html _site/ && cp -r painel-operador _site/
+      - run: mkdir _site && cp index.html _site/ && cp -r painel-operador matrix-business matrix-pro _site/
       - uses: actions/upload-pages-artifact@v3
         with: { path: _site }
       - id: d
