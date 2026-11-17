@@ -42,6 +42,7 @@ a{color:var(--ember)}
 /* Main */
 .main{min-width:0;display:flex;flex-direction:column}
 .top{display:none;align-items:center;gap:12px;padding:12px 16px;background:var(--side);color:var(--side-ink);position:sticky;top:0;z-index:30}
+.op-btn,.nav a.op-btn{opacity:1;display:flex;align-items:center;justify-content:center;gap:8px;margin:12px 0 4px;padding:10px 12px;border-radius:10px;background:var(--ember-2);color:#fff;text-decoration:none;font-weight:700;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,.18)}.op-btn:hover,.nav a.op-btn:hover{background:var(--ember-2);filter:brightness(1.08)}.op-top{margin-left:auto;padding:6px 10px;font-size:13px;margin-top:0;margin-bottom:0}
 .burger{background:none;border:0;color:inherit;font-size:22px;cursor:pointer;padding:2px 6px}
 .view{padding:32px 40px 80px;max-width:1180px;width:100%;margin:0 auto}
 .crumbs{font-size:13px;color:var(--muted);margin-bottom:6px}
@@ -226,13 +227,14 @@ h1{font-size:27px}
       <a href="#metricas" data-nav="metricas"><span class="ic">▲</span>Métricas</a>
       <div class="nav-group">Entregar</div>
       <a href="#entregar" data-nav="entregar"><span class="ic">●</span>Projetos</a>
+      <a class="op-btn" id="op-btn" href="painel-operador/" target="_blank" rel="noopener" title="Abrir o painel do operador em nova aba">▶ Painel do operador</a>
       <div class="nav-group">Conta</div>
       <a href="#config" data-nav="config"><span class="ic">⚙</span>Configurações</a>
     </nav>
     <div class="side-foot"><div class="sync" id="sync"><span class="dot"></span><span id="sync-t">Carregando…</span></div></div>
   </aside>
   <div class="main">
-    <header class="top"><button class="burger" id="burger" aria-label="Abrir menu">☰</button><b style="font-family:var(--fd);font-size:18px">Plataforma Matrix</b></header>
+    <header class="top"><button class="burger" id="burger" aria-label="Abrir menu">☰</button><b style="font-family:var(--fd);font-size:18px">Plataforma Matrix</b><a class="op-btn op-top" href="painel-operador/" target="_blank" rel="noopener">▶ Operador</a></header>
     <main class="view" id="view"></main>
   </div>
 </div>
