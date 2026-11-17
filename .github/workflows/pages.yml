@@ -22,6 +22,10 @@ jobs:
         with:
           enablement: true
       - run: mkdir _site && cp index.html _site/ && cp -r painel-operador matrix-business matrix-pro hagos _site/
+      - name: Carimbar versão (atualização automática das páginas)
+        run: |
+          echo "{\"v\":\"$GITHUB_SHA\"}" > _site/versao.json
+          find _site -name '*.html' -exec sed -i "s/__VERSAO__/$GITHUB_SHA/g" {} +
       - uses: actions/upload-pages-artifact@v3
         with: { path: _site }
       - id: d

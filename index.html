@@ -2139,5 +2139,24 @@ $("#chat-in").addEventListener("keydown", ev => { if(ev.key === "Enter" && !ev.s
 Store.loadLocal(); render(); setSync("local");
 Store.connect(); initCaps();
 </script>
+<script>/* Atualização automática: recarrega quando sai versão nova no GitHub Pages */
+(function(){
+  var V = '__VERSAO__', URL_V = 'versao.json';
+  if (V.charAt(0) === '_') return; // cópia local, sem versão
+  var ss = { get:function(k){try{return sessionStorage.getItem(k)}catch(e){return null}}, set:function(k,v){try{sessionStorage.setItem(k,v)}catch(e){}} };
+  function ocupado(){ var a = document.activeElement; return a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName); }
+  function checar(){
+    if (document.hidden) return;
+    fetch(URL_V + '?t=' + Date.now(), {cache:'no-store'}).then(function(r){ return r.ok ? r.json() : null; }).then(function(j){
+      if (!j || !j.v || j.v === V) return;
+      if (ss.get('mx_reload') === j.v) return; // já tentou esta versão
+      if (ocupado()) return; // não perde o que está sendo digitado
+      ss.set('mx_reload', j.v); location.reload();
+    }).catch(function(){});
+  }
+  checar(); setInterval(checar, 60000);
+  document.addEventListener('visibilitychange', checar);
+})();
+</script>
 </body>
 </html>
