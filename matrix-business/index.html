@@ -3,37 +3,82 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Plataforma Matrix — Matrix Business</title>
+<title>Plataforma Matrix — Matrix Business · Área de membros</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%23D9480F%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2219%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Georgia%22 font-weight=%22bold%22%3EM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#F5F2EC;--ink:#1C1A16;--side:#16140F;--side-ink:#EDE7DB;--side-muted:#9C9584;--ember:#D9480F;--ember-2:#F76707;--fd:'Fraunces',Georgia,serif;--fb:'Manrope',system-ui,sans-serif}
+  :root{--bg:#F5F2EC;--surface:#fff;--ink:#1C1A16;--ink-2:#4A463E;--muted:#7C766B;--line:#E6E0D5;--line-2:#D8D0C2;--side:#16140F;--side-2:#221F18;--side-ink:#EDE7DB;--side-muted:#9C9584;--ember:#D9480F;--ember-2:#F76707;--ember-soft:#FFF0E6;--red:#C92A2A;--fd:'Fraunces',Georgia,serif;--fb:'Manrope',system-ui,sans-serif;--shadow:0 1px 2px rgba(28,26,22,.05),0 4px 16px rgba(28,26,22,.05)}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--fb);-webkit-font-smoothing:antialiased}
   .topbar{background:var(--side);color:var(--side-ink)}
   .topbar .in{max-width:820px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:12px}
-  .brand-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--ember-2),var(--ember));display:grid;place-items:center;font:700 19px var(--fd);color:#fff}
+  .brand-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--ember-2),var(--ember));display:grid;place-items:center;font:700 19px var(--fd);color:#fff;flex:none}
   .marca{font:600 17px var(--fd)} .sub{font-size:11px;color:var(--side-muted);letter-spacing:.04em;text-transform:uppercase}
-  .topbar a{margin-left:auto;color:var(--side-ink);font-size:13px;text-decoration:none;border:1px solid #3a362c;border-radius:9px;padding:6px 12px}
+  .topbar .acoes{margin-left:auto;display:flex;gap:8px}
+  .topbar a{color:var(--side-ink);font-size:13px;text-decoration:none;border:1px solid #3a362c;border-radius:9px;padding:6px 12px;white-space:nowrap}
   .wrap{max-width:820px;margin:0 auto;padding:30px 20px 70px}
   .eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--ember)}
   h1{font:600 32px/1.15 var(--fd);letter-spacing:-.02em;margin:4px 0 22px}
-  .hero{background:var(--side);color:var(--side-ink);border-radius:12px;padding:24px;position:relative;overflow:hidden}
-  .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(247,103,7,.35),transparent 70%)}
-  .hero p{margin:0;color:var(--side-muted);position:relative}
+  .hero{background:var(--side);color:var(--side-ink);border-radius:12px;padding:28px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(247,103,7,.35),transparent 70%);pointer-events:none}
+  .hero>*{position:relative;z-index:1}
+  .hero .eyebrow{color:var(--ember-2)}
+  .hero h2{font:600 26px/1.2 var(--fd);letter-spacing:-.01em;color:#fff;margin:6px 0 8px}
+  .hero p{margin:0 0 20px;color:var(--side-muted);max-width:520px}
+  .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line-2);background:var(--surface);padding:10px 18px;border-radius:9px;cursor:pointer;font:700 15px var(--fb);color:var(--ink);text-decoration:none}
+  .btn.pri{background:var(--ember-2);border-color:var(--ember-2);color:#fff}
+  .btn.pri:hover{filter:brightness(1.08)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:24px;box-shadow:var(--shadow);margin-top:16px;max-width:440px;display:none}
+  .card.on{display:block}
+  .card h3{font:600 20px var(--fd);margin:0 0 4px}
+  .card .muted{color:var(--muted);font-size:14px;margin:0 0 6px}
+  label{display:block;font-size:13px;font-weight:600;color:var(--ink-2);margin:14px 0 5px}
+  input{width:100%;border:1px solid var(--line-2);background:#fff;border-radius:8px;padding:10px 12px;font:inherit;font-size:14px;outline:none}
+  input:focus{border-color:var(--ember);box-shadow:0 0 0 3px rgba(217,72,15,.12)}
+  .card .btn.pri{background:var(--ember);border-color:var(--ember);margin-top:16px;width:100%;justify-content:center}
+  .aviso{margin-top:12px;font-size:13px;color:var(--ink-2);min-height:1em}
+  .aviso.err{color:var(--red)}
+  .lock{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#A63A0B;background:var(--ember-soft);border:1px solid #FCD9C2;border-radius:99px;padding:2px 10px;margin-bottom:10px}
+  @media (max-width:560px){.sub{display:none}h1{font-size:26px}}
 </style>
 </head>
 <body>
 <div class="topbar"><div class="in">
   <div class="brand-mark">M</div>
   <div><div class="marca">Plataforma Matrix</div><div class="sub">IA para negócios</div></div>
-  <a href="../">← Plataforma</a>
+  <div class="acoes"><a href="../">← Plataforma</a></div>
 </div></div>
 <div class="wrap">
   <div class="eyebrow">Plataforma Matrix</div>
   <h1>Matrix Business</h1>
-  <div class="hero"><p>Em construção.</p></div>
+  <div class="hero">
+    <div class="eyebrow">Exclusivo para assinantes</div>
+    <h2>Área de membros</h2>
+    <p>Conteúdos, ferramentas e materiais do Matrix Business, liberados para quem tem a assinatura ativa.</p>
+    <button class="btn pri" id="entrar">Entrar</button>
+  </div>
+  <form class="card" id="login" autocomplete="on">
+    <span class="lock">🔒 Acesso de assinantes</span>
+    <h3>Entrar no Matrix Business</h3>
+    <p class="muted">Use o e-mail da sua assinatura.</p>
+    <label for="email">E-mail</label>
+    <input id="email" type="email" required autocomplete="email" placeholder="voce@empresa.com.br">
+    <label for="senha">Senha</label>
+    <input id="senha" type="password" required autocomplete="current-password" placeholder="Sua senha">
+    <button class="btn pri" type="submit">Entrar</button>
+    <div class="aviso" id="aviso"></div>
+  </form>
 </div>
+<script>
+  var f = document.getElementById('login');
+  document.getElementById('entrar').onclick = function(){ f.classList.add('on'); document.getElementById('email').focus(); };
+  f.onsubmit = function(e){
+    e.preventDefault();
+    var a = document.getElementById('aviso');
+    a.className = 'aviso';
+    a.textContent = 'O acesso dos assinantes está sendo liberado. Em breve você recebe seus dados de entrada por e-mail.';
+  };
+</script>
 </body>
 </html>
