@@ -97,8 +97,6 @@
     <div class="form">
       <label for="novoNum">Novo número (DDD + número)</label>
       <input id="novoNum" inputmode="tel" placeholder="Ex.: 91 98113-4746" autocomplete="off">
-      <label for="pin">PIN</label>
-      <input id="pin" inputmode="numeric" type="password" placeholder="PIN de 6 dígitos" autocomplete="off" maxlength="12">
       <button id="salvarNum" class="pri">Salvar número</button>
       <div class="aviso" id="avisoNum"></div>
     </div>
@@ -232,16 +230,14 @@
     var d = $('#novoNum').value.replace(/\D/g, '');
     if (d.length === 10 || d.length === 11) d = '55' + d;
     if (!/^55\d{10,11}$/.test(d)) { av.className = 'aviso err'; av.textContent = 'Número inválido. Use DDD + número, ex.: 91 98113-4746.'; return; }
-    var pin = $('#pin').value.trim();
-    if (!pin) { av.className = 'aviso err'; av.textContent = 'Digite o PIN.'; return; }
     b.disabled = true; av.className = 'aviso'; av.textContent = 'Salvando…';
-    fetch(FONTE + '?acao=numero&numero=' + encodeURIComponent(d) + '&pin=' + encodeURIComponent(pin), {cache: 'no-store'})
+    fetch(FONTE + '?acao=numero&numero=' + encodeURIComponent(d), {cache: 'no-store'})
       .then(function(r){ return r.json(); })
       .then(function(j){
         if (j && j.ok) {
           av.className = 'aviso ok'; av.textContent = 'Número salvo. A partir de agora só ele fala com o Agente Matrix.';
           $('#autorizado').textContent = 'final ' + j.autorizado_final;
-          $('#novoNum').value = ''; $('#pin').value = '';
+          $('#novoNum').value = '';
         } else { av.className = 'aviso err'; av.textContent = (j && j.erro) || 'Não foi possível salvar.'; }
       })
       .catch(function(){ av.className = 'aviso err'; av.textContent = 'Sem conexão. Tente de novo.'; })
